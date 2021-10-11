@@ -1,0 +1,81 @@
+
+/**
+* General style.
+*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    width: 100%;
+    display: flex;
+}
+
+nav {
+    margin: 0;
+    padding: 0;
+}
+
+/* Menu main*/
+.menu {
+    background-color: crimson;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+    width: 20rem;
+    height: 100vh;
+   justify-content: space-between;
+}
+
+.menu a {
+    text-decoration-line: none;
+    color: white;
+    font-size: 15px;
+    padding: 1rem;
+}
+
+#logo {
+    width: 20rem;
+    margin-left: 9rem;
+    margin-top: 3.5rem;
+}
+
+/* Secundo menu*/
+#menu2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 60rem;
+    text-align: center;
+    margin-left: 60rem;
+}
+
+#menu2 a {
+    text-decoration-line: none;
+    color: #ffaa05;
+    font-size: 15px;
+    padding: 1.5rem;
+}
+/* Design footer*/
+.myFooter {
+background-color: #ffaa05;
+    width: 100%;
+    height: 9rem;
+}
+
+.myFooter span {
+    display: flex;
+    text-align: center;
+    justify-content: flex-end;
+    padding: 1rem;
+    color: white;
+    font-size: 15px;
+}
