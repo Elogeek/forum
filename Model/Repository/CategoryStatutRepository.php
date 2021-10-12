@@ -20,7 +20,7 @@ class CategoryStatutRepository {
         return $statCat;
     }
 
-    /** Return a status of the category by id
+    /** Return a statut of the category by id
      * @param int $id
      * @return CategoryStatut|null
      */
@@ -35,7 +35,12 @@ class CategoryStatutRepository {
         return null;
     }
 
-    /** Modify statut of the category
+    // Return a name statut of the category by id
+    public  function showNameStatCat(string $nameStat): CategoryStatut {
+        $request = DB::getInstance()->prepare()
+    }
+
+    /** Modify statut of the category in the BDD
      * @param CategoryStatut $newStatut
      * @return bool
      */
@@ -46,4 +51,6 @@ class CategoryStatutRepository {
         return $request->execute();
     }
 
+    // Add a statut of the category in the BDD
+    // Delete a statut of  the category in the BDD
 }
