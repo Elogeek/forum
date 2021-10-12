@@ -45,7 +45,7 @@ class RoleRepository {
     /**
      * Return a Role by name
      * @param string $roleName
-     * @return Role
+     * @return Role|null
      */
     public function getRoleByName(string $roleName): ?Role {
         $request = DB::getInstance()->prepare("SELECT * FROM role WHERE name = :name");
