@@ -41,4 +41,14 @@ class SubjectRepository {
         return $a->getId() !== null && $a->getId() > 0;
     }
 
+    /**
+     * @param Subject $b
+     * @return bool
+     */
+    public function deleteSubject(Subject $b): bool {
+        $request = DB::getInstance()->prepare("DELETE FROM subject WHERE id = :id");
+        $request->bindValue('id', $b->getId());
+        return $request->execute();
+    }
+
 }
