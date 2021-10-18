@@ -1,4 +1,4 @@
-<?php
+<?php':author'
 namespace App\Repository;
 
 use App\Model\Entity\Subject;
@@ -15,11 +15,44 @@ class SubjectRepository {
         $request = DB::getInstance()->prepare("SELECT * FROM subject");
         if ($request->execute() && $data = $request->fetchAll()) {
             foreach ($data as $sData) {
-                $x[] = new Subject($sData['id'],$sData['title'],$sData['content'], $sData['categoryFk'], $sData['auhorfK'],$sData['commentFk'], $sData['subject'],$sData['subjectStatFk']);
+                $x[] = new Subject($sData['id'],$sData['title'],$sData['content'], $sData['categoryFk'], $sData['auhor-fK'],$sData['commentFk'], $sData['subjectStatFk']);
             }
         }
         return $x;
     }
+
+    /** Return a subject via authorFk
+     * @param int $author
+     * @return Subject|null
+     */
+    public function getSubjectByAuthor(int $author): ?Subject {
+        $request = DB::getInstance()->prepare("SELECT * from subject WHERE authorFk = :author");
+        $request->bindValue(':author', $author);
+        $result = $request->execute();
+        if ($result && $data = $request->fetch()) {
+            return new Subject($data['id'],$data['title'],$data['content'],$data['author-fk']);
+        }
+        return null;
+    }
+
+    /** Return a commentFk of the subject via authorFk
+     * @param string $com
+     * @return Subject|null
+     */
+    public function getCommentByAuthor(string $com): ?Subject {
+        $request = DB::getInstance()->prepare("SELECT * from subject WHERE authorFk = :author");
+        $request->bindValue(':author', $com);
+        $result = $request->execute();
+        if ($result && $data = $request->fetch()) {
+            return new Subject($data['id'],$data['title'],$data['author-fk'], $data['comment_fk']);
+        }
+        return null;
+    }
+
+    // Return a subject via categoryFk
+
+    // Return a commentFk via categoryFk
+    // Return a subjectSatutsFk of the category via subjectStatutsFk
 
     /**
      * @param Subject $a
