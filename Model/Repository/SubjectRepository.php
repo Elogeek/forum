@@ -95,9 +95,13 @@ class SubjectRepository {
     // Return all subject closed (id=>4=>clôturer)
     public function showSubjectClose(): ?Subject {
         $req = DB::getInstance()->prepare("SELECT COUNT(subject_status_fk) FROM subject WHERE id ='4'");
-    }
-    // Return all subject open
 
+    }
+    // Return all subject open(id=>1=>créer)
+    public function showSubjectOpen(): ?Subject {
+        $req = DB::getInstance()->prepare("SELECT COUNT(subject_status_fk) FROM subject WHERE id ='1'");
+
+    }
     /** Add a subject in the BDD
      * @param Subject $a
      * @return bool
