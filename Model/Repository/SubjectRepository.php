@@ -49,12 +49,56 @@ class SubjectRepository {
         return null;
     }
 
-    // Return a subject via categoryFk
+    /** Return a subject via categoryFk
+     * @param string $sub
+     * @return Subject|null
+     */
+    public function getSubjectByCat(string $sub): ?Subject {
+        $req = DB::getInstance()->prepare("SELECT * from subject WHERE categoryFk = :cat");
+        $req->bindValue(':cat', $sub);
+        $result = $req->execute();
+        if ($result && $data = $req->fetch()) {
+            return new Subject($data['id'],$data['title'],$data['content'],$data['category-fk'],$data['author-fk']);
+        }
+        return null;
+    }
 
-    // Return a commentFk via categoryFk
-    // Return a subjectSatutsFk of the category via subjectStatutsFk
+    /** Return a commentFk via categoryFk
+     * @param string $com
+     * @return Subject|null
+     */
+    public function getComByCat(string $com): ?Subject {
+        $request = DB::getInstance()->prepare("SELECT * from subject WHERE categoryFk = :cat");
+        $request->bindValue(':cat', $com);
+        $result = $request->execute();
+        if ($result && $data = $request->fetch()) {
+            return new Subject($data['category-fk'],$data['author-fk'],$data['comment_fk']);
+        }
+        return null;
+    }
 
-    /**
+    /** Return a statut of the Subject object based on a given role subject_status_fk
+     * @param int $id
+     * @return Subject|null
+     */
+    public function getStatById(int $id): ?Subject {
+        $req = DB::getInstance()->prepare("SELECT * FROM subject WHERE subject_status_fk = :subStat");
+        $req->bindValue(':subStat', $id);
+        $result = $req->execute();
+        if ($result && $data = $req->fetch()) {
+            return new Subject($data['id'], $data['name']);
+        }
+
+        return null;
+    }
+
+    // Return all subject closed (id=>4=>clôturer)
+    public function showSubjectClose(): ?Subject {
+        $req = DB::getInstance()->prepare("SELECT COUNT(subject_status_fk) FROM subject WHERE id ='4'");
+    }
+    // Return all subject open
+
+    /** Add a subject in the BDD
      * @param Subject $a
      * @return bool
      */
