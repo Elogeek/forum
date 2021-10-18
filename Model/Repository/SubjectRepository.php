@@ -1,4 +1,4 @@
-<?php':author'
+<?php
 namespace App\Repository;
 
 use App\Model\Entity\Subject;
@@ -92,11 +92,24 @@ class SubjectRepository {
         return null;
     }
 
-    // Return all subject closed (id=>4=>clôturer)
-    public function showSubjectClose(): ?Subject {
+    /** Return all subject closed (id=>4=>clôturer)
+     * @param int $id
+     * @return bool|array|null
+     */
+    public function showSubjectClose(int $id): bool|array {
         $req = DB::getInstance()->prepare("SELECT COUNT(subject_status_fk) FROM subject WHERE id ='4'");
-
+        $req->bindValue(':id', $id);
+        $res = $req->execute();
+        if ($req->execute() && $data = $req->fetchAll()) {
+            foreach ($data as $d) {
+                $result[] = new Subject($d['id'], $d['name']);
+            }
+        } else if (isset($result)) {
+            return $res;
+        }
+        return true;
     }
+
     // Return all subject open(id=>1=>créer)
     public function showSubjectOpen(): ?Subject {
         $req = DB::getInstance()->prepare("SELECT COUNT(subject_status_fk) FROM subject WHERE id ='1'");
