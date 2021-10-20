@@ -12,6 +12,24 @@ use PDOException;
 class RoleRepository {
 
     /**
+     * Search role
+     * @param $roleId
+     * @return Role
+     */
+    public function searchRole($roleId):Role {
+        $stmt = DB::getInstance()->prepare("SELECT * FROM role WHERE id = :roleId LIMIT 1");
+        $stmt->bindValue(':roleId', $roleId);
+        $state = $stmt->execute();
+        $role = null;
+
+        if($state) {
+            $roleData = $stmt->fetch();
+            $role = new Role($roleData['id'], $roleData['name']);
+        }
+        return $role;
+    }
+
+    /**
      * Get all rôles.
      * @return array
      */

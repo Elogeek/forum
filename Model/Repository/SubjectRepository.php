@@ -8,128 +8,55 @@ class SubjectRepository {
 
     /**
      * Get all subjects.
-     * @return array
+     * @param $catId
+     * @return array|null
      */
-    public function getSubject(): array {
+    public function getSubject($catId): ?array {
         $x = [];
-        $request = DB::getInstance()->prepare("SELECT * FROM subject");
+        $request = DB::getInstance()->prepare("SELECT * FROM subject WHERE categoryFk = :catId ORDER BY  DESC");
+        $request->bindValue(':catId', $catId);
         if ($request->execute() && $data = $request->fetchAll()) {
             foreach ($data as $sData) {
-                $x[] = new Subject($sData['id'],$sData['title'],$sData['content'], $sData['categoryFk'], $sData['auhor-fK'],$sData['commentFk'], $sData['subjectStatFk']);
+                $x[] = new Subject($sData['id'],$sData['title'],$sData['content'], $sData['categoryFk'], $sData['auhorFK'],$sData['commentFk']);
             }
         }
         return $x;
     }
 
-    /** Return a subject via authorFk
-     * @param int $author
+    /**
+     * Search a subject
+     * @param $subjectId
      * @return Subject|null
      */
-    public function getSubjectByAuthor(int $author): ?Subject {
-        $request = DB::getInstance()->prepare("SELECT * from subject WHERE authorFk = :author");
-        $request->bindValue(':author', $author);
-        $result = $request->execute();
-        if ($result && $data = $request->fetch()) {
-            return new Subject($data['id'],$data['title'],$data['content'],$data['author-fk']);
+    public function searchSubject($subjectId): ?Subject {
+        $stmt = DB::getInstance()->prepare("SELECT * FROM subject  WHERE id = :subjectId LIMIT 1");
+        $stmt->bindValue(':subjectId', $subjectId);
+        $state = $stmt->execute();
+        if($state && $sData = $stmt->fetch())
+        {
+            $subject = new Subject($sData['id'],$sData['title'],$sData['content'], $sData['categoryFk'], $sData['auhorFK'],$sData['commentFk']);
         }
-        return null;
-    }
-
-    /** Return a commentFk of the subject via authorFk
-     * @param string $com
-     * @return Subject|null
-     */
-    public function getCommentByAuthor(string $com): ?Subject {
-        $request = DB::getInstance()->prepare("SELECT * from subject WHERE authorFk = :author");
-        $request->bindValue(':author', $com);
-        $result = $request->execute();
-        if ($result && $data = $request->fetch()) {
-            return new Subject($data['id'],$data['title'],$data['author-fk'], $data['comment_fk']);
-        }
-        return null;
-    }
-
-    /** Return a subject via categoryFk
-     * @param string $sub
-     * @return Subject|null
-     */
-    public function getSubjectByCat(string $sub): ?Subject {
-        $req = DB::getInstance()->prepare("SELECT * from subject WHERE categoryFk = :cat");
-        $req->bindValue(':cat', $sub);
-        $result = $req->execute();
-        if ($result && $data = $req->fetch()) {
-            return new Subject($data['id'],$data['title'],$data['content'],$data['category-fk'],$data['author-fk']);
-        }
-        return null;
-    }
-
-    /** Return a commentFk via categoryFk
-     * @param string $com
-     * @return Subject|null
-     */
-    public function getComByCat(string $com): ?Subject {
-        $request = DB::getInstance()->prepare("SELECT * from subject WHERE categoryFk = :cat");
-        $request->bindValue(':cat', $com);
-        $result = $request->execute();
-        if ($result && $data = $request->fetch()) {
-            return new Subject($data['category-fk'],$data['author-fk'],$data['comment_fk']);
-        }
-        return null;
-    }
-
-    /** Return a statut of the Subject object based on a given role subject_status_fk
-     * @param int $id
-     * @return Subject|null
-     */
-    public function getStatById(int $id): ?Subject {
-        $req = DB::getInstance()->prepare("SELECT * FROM subject WHERE subject_status_fk = :subStat");
-        $req->bindValue(':subStat', $id);
-        $result = $req->execute();
-        if ($result && $data = $req->fetch()) {
-            return new Subject($data['id'], $data['name']);
+        else {
+            $subject = null;
         }
 
-        return null;
+        return $subject;
     }
 
-    /** Return all subject closed (id=>4=>clôturer)
-     * @param int $id
-     * @return bool|array|null
-     */
-    public function showSubjectClose(int $id): bool|array {
-        $req = DB::getInstance()->prepare("SELECT COUNT(subject_status_fk) FROM subject WHERE id ='4'");
-        $req->bindValue(':id', $id);
-        $res = $req->execute();
-        if ($req->execute() && $data = $req->fetchAll()) {
-            foreach ($data as $d) {
-                $result[] = new Subject($d['id'], $d['name']);
-            }
-        } else if (isset($result)) {
-            return $res;
-        }
-        return true;
-    }
-
-    // Return all subject open(id=>1=>créer)
-    public function showSubjectOpen(): ?Subject {
-        $req = DB::getInstance()->prepare("SELECT COUNT(subject_status_fk) FROM subject WHERE id ='1'");
-
-    }
     /** Add a subject in the BDD
      * @param Subject $a
      * @return bool
      */
     public function addSubject(Subject $a): bool {
         $request = DB::getInstance()->prepare(
-            "INSERT INTO subject(title,content,categoryFk,authorFk,commentFk,subjectStatFk) 
-                    VALUES(:t,:content,:catFk,:authorFk,:commentFk,:subjStatFk)"
+            "INSERT INTO subject(title,content,categoryFk,authorFk,commentFk) 
+                    VALUES(:t,:content,:catFk,:authorFk,:commentFk)"
         );
         $request->bindValue(':t', $a->getTitle());
         $request->bindValue(':content', $a->getContent());
         $request->bindValue(':catFk', $a->getCategoryFk());
         $request->bindValue(':authorFk', $a->getAuthorFk());
         $request->bindValue(':commentFk', $a->getCommentFk());
-        $request->bindValue(':subjectStatFk', $a->getSubjectStatFk());
 
         $a->setId(DB::getInstance()->lastInsertId());
         return $a->getId() !== null && $a->getId() > 0;
@@ -143,6 +70,21 @@ class SubjectRepository {
         $request = DB::getInstance()->prepare("DELETE FROM subject WHERE id = :id");
         $request->bindValue('id', $b->getId());
         return $request->execute();
+    }
+
+    /** Modify infos a subject in the BDD
+     * @param $subjectId
+     * @param $title
+     * @param $content
+     * @return bool
+     */
+    public function updateSubject($subjectId, $title, $content) :bool {
+        $stmt = DB::getInstance()->prepare("UPDATE subject SET title = :title, content = :content WHERE id = :subjectId ");
+        $stmt->bindValue(':title', $title);
+        $stmt->bindValue(':content', $content);
+        $stmt->bindValue(':subjectId', $subjectId);
+
+        return $stmt->execute();
     }
 
 }

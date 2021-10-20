@@ -9,10 +9,28 @@ use PDOException;
 class CategoryRepository {
 
     /**
+     * Search category
+     * @param $categoryId
+     * @return Category
+     */
+    public function searchCategory($categoryId):Category {
+        $stmt = DB::getInstance()->prepare("SELECT * FROM category WHERE id = :categoryId LIMIT 1");
+        $stmt->bindValue(':categoryId', $categoryId);
+        $state = $stmt->execute();
+        $category = null;
+
+        if($state) {
+            $categoryData = $stmt->fetch();
+            $category = new Category($categoryData['id'], $categoryData['name']);
+        }
+        return $category;
+    }
+
+    /**
      * Get all categories.
      * @return array
      */
-    public function getCategory(): array {
+    public function getAllCategory(): array {
         $cat = [];
         $request = DB::getInstance()->prepare("SELECT * FROM category");
         if ($request->execute() && $data = $request->fetchAll()) {

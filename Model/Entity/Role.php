@@ -7,6 +7,16 @@ class Role {
     private ?string $name;
 
     /**
+     * Role constructor.
+     * @param int|null $id
+     * @param string|null $name
+     */
+    public function __construct(int $id = null, string $name = null) {
+        $this->id = $id;
+        $this->name = $name;
+    }
+
+    /**
      * @return int|null
      */
     public function getId(): ?int {

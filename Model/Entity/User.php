@@ -8,7 +8,7 @@ class User {
     private ?string $mail;
     private ?string $password;
     private ?int $role;
-    private ?int $userOnline;
+    private ?bool $userOnline;
 
     /**
      * @return int|null
@@ -81,17 +81,20 @@ class User {
     }
 
     /**
-     * @return int|null
+     * @return bool|null
      */
-    public function getUserOnline(): ?int {
+    public function getUserOnline(): ?bool {
         return $this->userOnline;
+
     }
 
     /**
-     * @param int|null $userOnline
+     * @param bool|null $userOnline
+     * @return bool
      */
-    public function setUserOnline(?int $userOnline): void {
+    public function setUserOnline(?bool $userOnline): bool {
         $this->userOnline = $userOnline;
+        return  $this->getUserOnline();
     }
 
 }

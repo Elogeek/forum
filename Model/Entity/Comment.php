@@ -10,6 +10,23 @@ class Comment {
     private ?string $datePost;
 
     /**
+     * Commentary constructor.
+     * @param int|null $id
+     * @param int|null $userFk
+     * @param int|null $subject
+     * @param string|null $content
+     * @param null $datePost
+     */
+    public function __construct(int $id = null, int $userFk = null, int $subject = null, string $content = null, $datePost = null)
+    {
+        $this->id = $id;
+        $this->userFk = $userFk;
+        $this->subject = $subject;
+        $this->content = $content;
+        $this->datePost = $datePost;
+    }
+
+    /**
      * @return int|null
      */
     public function getId(): ?int {
@@ -32,9 +49,11 @@ class Comment {
 
     /**
      * @param int|null $userFk
+     * @return Comment
      */
-    public function setUserFk(?int $userFk): void {
+    public function setUserFk(?int $userFk): Comment {
         $this->userFk = $userFk;
+        return $this;
     }
 
     /**
@@ -46,9 +65,11 @@ class Comment {
 
     /**
      * @param string|null $subject
+     * @return Comment
      */
-    public function setSubject(?string $subject): void {
+    public function setSubject(?string $subject): Comment {
         $this->subject = $subject;
+        return  $this;
     }
 
     /**
@@ -60,9 +81,11 @@ class Comment {
 
     /**
      * @param string|null $content
+     * @return Comment
      */
-    public function setContent(?string $content): void {
+    public function setContent(?string $content): Comment {
         $this->content = $content;
+        return  $this;
     }
 
     /**
