@@ -1,3 +1,4 @@
+
 <section class="forum">
     <h3><?= isset($_SESSION['email']) ? 'Vous êtes connecté(e) en tant que ' . $_SESSION['email'] : "Vous n'êtes pas connecté" ?> </h3>
 
@@ -47,7 +48,8 @@
         }
         ?>
     </div>
-    <!--display messages chat here-->
-    <div class="comment"></div>
+    <!--display messages forum here-->
+    <div class="comments"></div>
+    <div class="subjects"></div>
 
 </section>

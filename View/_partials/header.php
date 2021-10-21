@@ -24,7 +24,6 @@
             <!--Programming pages-->
 
             <a href="#">Le coin des geeks</a>
-
             <a href="#">Jquery</a>
             <a href="#">Javascript</a>
             <a href="#">Php</a>

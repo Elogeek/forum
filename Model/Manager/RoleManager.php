@@ -7,9 +7,9 @@ use PDO;
 use PDOException;
 
 /**
- * Class RoleRepository
+ * Class RoleManager
  */
-class RoleRepository {
+class RoleManager {
 
     /**
      * Search role

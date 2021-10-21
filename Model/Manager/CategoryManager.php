@@ -1,12 +1,12 @@
 <?php
-namespace App\Repository;
+namespace App\Manager;
 
 use App\Model\Entity\Category;
 use DB;
 use PDO;
 use PDOException;
 
-class CategoryRepository {
+class CategoryManager {
 
     /**
      * Search category

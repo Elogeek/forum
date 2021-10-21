@@ -7,8 +7,25 @@ class User {
     private ?string $pseudo;
     private ?string $mail;
     private ?string $password;
-    private ?int $role;
-    private ?bool $userOnline;
+    private ?int $roleFk;
+    private ?int $userOnline;
+
+    /**
+     * @param int|null $id
+     * @param string|null $pseudo
+     * @param string|null $mail
+     * @param string|null $password
+     * @param int|null $roleFk
+     * @param int|null $userOnline
+     */
+    public function __construct(int $id = null, string $pseudo = null, string $mail = null, string $password = null, int $roleFk = null, int $userOnline = null) {
+        $this->id = $id;
+        $this->pseudo = $pseudo;
+        $this->mail = $mail;
+        $this->password = $password;
+        $this->roleFk = $roleFk;
+        $this->userOnline = $userOnline;
+    }
 
     /**
      * @return int|null
@@ -33,9 +50,11 @@ class User {
 
     /**
      * @param string|null $pseudo
+     * @return User
      */
-    public function setPseudo(?string $pseudo): void {
+    public function setPseudo(?string $pseudo): User {
         $this->pseudo = $pseudo;
+        return $this;
     }
 
     /**
@@ -47,9 +66,11 @@ class User {
 
     /**
      * @param string|null $mail
+     * @return User
      */
-    public function setMail(?string $mail): void {
+    public function setMail(?string $mail): User {
         $this->mail = $mail;
+        return $this;
     }
 
     /**
@@ -61,40 +82,43 @@ class User {
 
     /**
      * @param string|null $password
+     * @return User
      */
-    public function setPassword(?string $password): void {
+    public function setPassword(?string $password): User {
         $this->password = $password;
+        return $this;
     }
 
     /**
      * @return int|null
      */
-    public function getRole(): ?int {
-        return $this->role;
+    public function getRoleFk(): ?int {
+        return $this->roleFk;
     }
 
     /**
-     * @param int|null $role
+     * @param int|null $roleFk
+     * @return User
      */
-    public function setRole(?int $role): void {
-        $this->role = $role;
+    public function setRoleFk(?int $roleFk): User {
+        $this->roleFk = $roleFk;
+        return $this;
     }
 
     /**
-     * @return bool|null
+     * @return int|null
      */
-    public function getUserOnline(): ?bool {
+    public function getUserOnline(): ?int {
         return $this->userOnline;
-
     }
 
     /**
-     * @param bool|null $userOnline
-     * @return bool
+     * @param int|null $userOnline
+     * @return User
      */
-    public function setUserOnline(?bool $userOnline): bool {
+    public function setUserOnline(?int $userOnline): User {
         $this->userOnline = $userOnline;
-        return  $this->getUserOnline();
+        return $this;
     }
 
 }

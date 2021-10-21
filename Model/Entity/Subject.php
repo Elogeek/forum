@@ -9,6 +9,7 @@ class Subject {
     private ?int $categoryFk;
     private ?int $authorFk;
     private ?int $commentFk;
+    private ?string $datePost;
 
 
     /**
@@ -19,14 +20,16 @@ class Subject {
      * @param int|null $categoryFk
      * @param int|null $authorFk
      * @param string|null $commentFk
+     * @param string|null $datePost
      */
-    public function __construct(int $id = null, int $title = null, string $content = null, int $categoryFk = null, int $authorFk = null, string $commentFk = null) {
+    public function __construct(int $id = null, int $title = null, string $content = null, int $categoryFk = null, int $authorFk = null, string $commentFk = null,$datePost = null) {
         $this->id = $id;
         $this->title = $title;
         $this->content = $content;
         $this->categoryFk = $categoryFk;
         $this->authorFk = $authorFk;
         $this->commentFk = $commentFk;
+        $this->datePost = $datePost;
     }
 
     /**
@@ -121,6 +124,20 @@ class Subject {
     public function setCommentFk(?int $commentFk): Subject {
         $this->commentFk = $commentFk;
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDatePost(): ?string {
+        return $this->datePost;
+    }
+
+    /**
+     * @param string|null $datePost
+     */
+    public function setDatePost(?string $datePost): void {
+        $this->datePost = $datePost;
     }
 
 }

@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Model\Entity\Comment;
 use DB;
 
-class CommentRepository {
+class CommentManager {
     /**
      * Get all public commentary of a subject
      * @param $subject
