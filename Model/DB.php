@@ -1,7 +1,7 @@
 <?php
 class DB {
     private string $host = 'localhost';
-    private string $db = 'forumEval';
+    private string $db = 'forum';
     private string $user = 'dev';
     private string $password = 'dev';
     private static ?PDO $dbInstance = null;

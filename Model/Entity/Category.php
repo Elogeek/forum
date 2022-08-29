@@ -17,6 +17,7 @@ class Category {
     }
 
     /**
+     * Get id of Category
      * @return int|null
      */
     public function getId(): ?int {
@@ -31,6 +32,7 @@ class Category {
     }
 
     /**
+     * Get name of Category
      * @return string|null
      */
     public function getName(): ?string {
@@ -38,6 +40,7 @@ class Category {
     }
 
     /**
+     * Set id of Category
      * @param string|null $name
      */
     public function setName(?string $name): void {

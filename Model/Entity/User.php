@@ -4,30 +4,41 @@ namespace App\Model\Entity;
 class User {
 
     private ?int $id;
-    private ?string $pseudo;
-    private ?string $mail;
+    private ?int $status;
+    private ?string $registrationDate;
+    private ?string $username;
+    private ?string $lastname;
     private ?string $password;
+    private ?string $email;
+    private ?string $pseudo;
     private ?int $roleFk;
-    private ?int $userOnline;
 
     /**
+     * User constructor
      * @param int|null $id
-     * @param string|null $pseudo
-     * @param string|null $mail
+     * @param int|null $status
+     * @param string|null $registrationDate
+     * @param string|null $username
+     * @param string|null $lastname
      * @param string|null $password
+     * @param string|null $email
+     * @param string|null $pseudo
      * @param int|null $roleFk
-     * @param int|null $userOnline
      */
-    public function __construct(int $id = null, string $pseudo = null, string $mail = null, string $password = null, int $roleFk = null, int $userOnline = null) {
+    public function __construct(int $id = null, int $status = null, string $registrationDate = null, string $username = null, string $lastname = null, string $password = null, string $email = null, string $pseudo = null, int $roleFk = null) {
         $this->id = $id;
-        $this->pseudo = $pseudo;
-        $this->mail = $mail;
+        $this->status = $status;
+        $this->registrationDate = $registrationDate;
+        $this->username = $username;
+        $this->lastname = $lastname;
         $this->password = $password;
+        $this->email = $email;
+        $this->pseudo = $pseudo;
         $this->roleFk = $roleFk;
-        $this->userOnline = $userOnline;
     }
 
     /**
+     *  Get id of the user
      * @return int|null
      */
     public function getId(): ?int {
@@ -35,6 +46,7 @@ class User {
     }
 
     /**
+     * Set id of the user
      * @param int|null $id
      */
     public function setId(?int $id): void {
@@ -42,6 +54,107 @@ class User {
     }
 
     /**
+     * Get status of the user (online,...)
+     * @return int|null
+     */
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set status of the user
+     * @param int|null $status
+     * @return User
+     */
+    public function setStatus(?int $status): User
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * Get registration date of the user
+     * @return string|null
+     */
+    public function getRegistrationDate(): ?string
+    {
+        return $this->registrationDate;
+    }
+
+    /**
+     * Set registration date of the user
+     * @param string|null $registrationDate
+     * @return User
+     */
+    public function setRegistrationDate(?string $registrationDate): User
+    {
+        $this->registrationDate = $registrationDate;
+        return $this;
+    }
+
+    /**
+     *  Get username of the user
+     * @return string|null
+     */
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set username of the user
+     * @param string|null $username
+     * @return User
+     */
+    public function setUsername(?string $username): User
+    {
+        $this->username = $username;
+        return $this;
+    }
+
+    /**
+     * Get lastname of the user
+     * @return string|null
+     */
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * Set lastname of the user
+     * @param string|null $lastname
+     * @return User
+     */
+    public function setLastname(?string $lastname):User
+    {
+        $this->lastname = $lastname;
+        return $this;
+    }
+
+    /**
+     * Get email of the user
+     * @return string|null
+     */
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set email of the user
+     * @param string|null $email
+     * @return User
+     */
+    public function setEmail(?string $email): User
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * Get pseudo of the user
      * @return string|null
      */
     public function getPseudo(): ?string {
@@ -49,6 +162,7 @@ class User {
     }
 
     /**
+     * Set pseudo of the user
      * @param string|null $pseudo
      * @return User
      */
@@ -58,22 +172,7 @@ class User {
     }
 
     /**
-     * @return string|null
-     */
-    public function getMail(): ?string {
-        return $this->mail;
-    }
-
-    /**
-     * @param string|null $mail
-     * @return User
-     */
-    public function setMail(?string $mail): User {
-        $this->mail = $mail;
-        return $this;
-    }
-
-    /**
+     * Get password of the user
      * @return string|null
      */
     public function getPassword(): ?string {
@@ -81,6 +180,7 @@ class User {
     }
 
     /**
+     * Set password of the user
      * @param string|null $password
      * @return User
      */
@@ -90,6 +190,7 @@ class User {
     }
 
     /**
+     * Get role of the user
      * @return int|null
      */
     public function getRoleFk(): ?int {
@@ -97,28 +198,16 @@ class User {
     }
 
     /**
-     * @param int|null $roleFk
+     * Set role of the user
+     * @param false|int|null $roleFk
      * @return User
      */
-    public function setRoleFk(?int $roleFk): User {
+    public function setRoleFk($roleFk): User {
         $this->roleFk = $roleFk;
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getUserOnline(): ?int {
-        return $this->userOnline;
-    }
 
-    /**
-     * @param int|null $userOnline
-     * @return User
-     */
-    public function setUserOnline(?int $userOnline): User {
-        $this->userOnline = $userOnline;
-        return $this;
-    }
+
 
 }
