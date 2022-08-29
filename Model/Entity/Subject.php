@@ -13,16 +13,16 @@ class Subject {
     private ?string $content;
 
 
-
     /**
      * Subject constructor.
      * @param int|null $id
-     * @param int|null $title
-     * @param string|null $content
-     * @param int|null $categoryFk
-     * @param int|null $authorFk
-     * @param string|null $commentFk
+     * @param int|null $status
      * @param string|null $datePost
+     * @param int|null $authorFk
+     * @param int|null $categoryFk
+     * @param string|null $name
+     * @param string|null $description
+     * @param string|null $content
      */
     public function __construct(int $id = null, int $status = null,
                                 string $datePost = null, int $authorFk = null, int $categoryFk = null,
