@@ -4,12 +4,14 @@ namespace App\Model\Entity;
 class Subject {
 
     private ?int $id;
-    private ?string $title;
-    private ?string $content;
-    private ?int $categoryFk;
-    private ?int $authorFk;
-    private ?int $commentFk;
+    private ?string $status;
     private ?string $datePost;
+    private ?string $authorFk;
+    private ?string $categoryFk;
+    private ?string $name;
+    private ?string $description;
+    private ?string $content;
+
 
 
     /**
@@ -22,17 +24,22 @@ class Subject {
      * @param string|null $commentFk
      * @param string|null $datePost
      */
-    public function __construct(int $id = null, int $title = null, string $content = null, int $categoryFk = null, int $authorFk = null, string $commentFk = null,$datePost = null) {
+    public function __construct(int $id = null, int $status = null,
+                                string $datePost = null, int $authorFk = null, int $categoryFk = null,
+                                string $name = null, string $description = null, string $content = null) {
         $this->id = $id;
-        $this->title = $title;
-        $this->content = $content;
-        $this->categoryFk = $categoryFk;
-        $this->authorFk = $authorFk;
-        $this->commentFk = $commentFk;
+        $this->status = $status;
         $this->datePost = $datePost;
+        $this->authorFk = $authorFk;
+        $this->categoryFk = $categoryFk;
+        $this->description = $description;
+        $this->content = $content;
+
+
     }
 
     /**
+     * Get id of the subject
      * @return int|null
      */
     public function getId(): ?int {
@@ -40,6 +47,7 @@ class Subject {
     }
 
     /**
+     * Set id of the subject
      * @param int|null $id
      */
     public function setId(?int $id): void {
@@ -47,22 +55,119 @@ class Subject {
     }
 
     /**
-     * @return string|null
+     * Get status of the subject
+     * @return int|null
      */
-    public function getTitle(): ?string {
-        return $this->title;
+    public function getStatus(): ?int {
+        return $this->status;
     }
 
     /**
-     * @param string|null $title
+     * Set status of the subject
+     * @param int|null $status
      * @return Subject
      */
-    public function setTitle(?string $title): Subject {
-        $this->title = $title;
+    public function setStatus(?int $status): Subject {
+         $this->status = $status;
+         return  $this;
+    }
+
+    /**
+     * Get topic creation date
+     * @return string|null
+     */
+    public function getDatePost(): ?string {
+        return $this->datePost;
+    }
+
+    /**
+     * Set topic creation date
+     * @param string|null $datePost
+     * @return Subject
+     */
+    public function setDatePost(?string $datePost): Subject {
+        $this->datePost = $datePost;
         return $this;
     }
 
     /**
+     * Get user (user_fk in the DB) of the subject
+     * @return int|null
+     */
+    public function getAuthorFk(): ?int {
+        return $this->authorFk;
+    }
+
+    /**
+     * Set user (user_fk in the DB) of the subject
+     * @param int|null $authorFk
+     * @return Subject
+     */
+    public function setAuthorFk($authorFk): Subject {
+        $this->authorFk = $authorFk;
+        return $this;
+    }
+
+    /**
+     * Get category (category_fk in the DB) of the subject
+     * @return int|null
+     */
+    public function getCategoryFk(): ?int {
+        return $this->categoryFk;
+    }
+
+    /**
+     * Set category (category_fk in the DB) of the subject
+     * @param int|null $categoryFk
+     * @return Subject
+     */
+    public function setCategoryFk($categoryFk): Subject {
+        $this->categoryFk = $categoryFk;
+        return $this;
+    }
+
+    /**
+     * Get name of the subject
+     * @return string|null
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set name of the subject
+     * @param string|null $name
+     * @return Subject
+     */
+    public function setName(?string $name): Subject
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Get description of Subject
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set description of the subject
+     * @param string|null $description
+     * @return Subject
+     */
+    public function setDescription(?string $description): Subject
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * Get content of the subject
      * @return string|null
      */
     public function getContent(): ?string {
@@ -70,6 +175,7 @@ class Subject {
     }
 
     /**
+     * Set content of the subject
      * @param string|null $content
      * @return Subject
      */
@@ -78,37 +184,6 @@ class Subject {
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getCategoryFk(): ?int {
-        return $this->categoryFk;
-    }
-
-    /**
-     * @param int|null $categoryFk
-     * @return Subject
-     */
-    public function setCategoryFk(?int $categoryFk): Subject {
-        $this->categoryFk = $categoryFk;
-        return $this;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getAuthorFk(): ?int {
-        return $this->authorFk;
-    }
-
-    /**
-     * @param int|null $authorFk
-     * @return Subject
-     */
-    public function setAuthorFk(?int $authorFk): Subject {
-        $this->authorFk = $authorFk;
-        return $this;
-    }
 
     /**
      * @return int|null
@@ -126,18 +201,6 @@ class Subject {
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getDatePost(): ?string {
-        return $this->datePost;
-    }
 
-    /**
-     * @param string|null $datePost
-     */
-    public function setDatePost(?string $datePost): void {
-        $this->datePost = $datePost;
-    }
 
 }
