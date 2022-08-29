@@ -30,7 +30,7 @@ class CategoryManager {
      * Get all categories.
      * @return array
      */
-    public function getAllCategory(): array {
+    public function getAllCategories(): array {
         $cat = [];
         $request = DB::getInstance()->prepare("SELECT * FROM category");
         if ($request->execute() && $data = $request->fetchAll()) {
@@ -80,7 +80,7 @@ class CategoryManager {
      * @param Category $cat
      * @return bool
      */
-    public function addCat(Category $cat): bool {
+    public function addCategory($name): bool {
         $request = DB::getInstance()->prepare("INSERT INTO category (name) VALUES (:name)");
         $request->bindValue(':name', $cat->getName());
         $request->execute();
@@ -93,7 +93,7 @@ class CategoryManager {
      * @param Category $cat
      * @return bool
      */
-    public function deleteCat(Category $cat): bool {
+    public function deleteCategory(): bool {
         $request = DB::getInstance()->prepare("DELETE FROM category WHERE id = :id");
         $request->bindValue('id', $cat->getId());
         return $request->execute();

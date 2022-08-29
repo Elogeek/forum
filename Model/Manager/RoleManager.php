@@ -3,8 +3,7 @@ namespace App\Repository;
 
 use App\Model\Entity\Role;
 use DB;
-use PDO;
-use PDOException;
+
 
 /**
  * Class RoleManager
@@ -30,7 +29,7 @@ class RoleManager {
     }
 
     /**
-     * Get all rôles.
+     * Get all roles
      * @return array
      */
     public function getRoles(): array {
