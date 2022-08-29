@@ -1,32 +1,36 @@
 <?php
 namespace App\Model\Entity;
 
-class Comment {
+class Commentary {
 
     private ?int $id;
-    private ?int $userFk;
-    private ?string $subject;
+    private ?string $status;
+    private ?int $authorFk;
+    private ?string $subjectFk;
     private ?string $content;
     private ?string $datePost;
 
     /**
-     * Commentary constructor.
+     * Comment constructor.
      * @param int|null $id
-     * @param int|null $userFk
-     * @param int|null $subject
+     * @param int|null $status
+     * @param int|null $authorFk
+     * @param int|null $subjectFk
      * @param string|null $content
      * @param null $datePost
      */
-    public function __construct(int $id = null, int $userFk = null, int $subject = null, string $content = null, $datePost = null)
+    public function __construct(int $id = null, int $status = null, int $authorFk = null, int $subjectFk = null, string $content = null, $datePost = null)
     {
         $this->id = $id;
-        $this->userFk = $userFk;
-        $this->subject = $subject;
+        $this->status = $status;
+        $this->authorFk = $authorFk;
+        $this->subjectFk = $subjectFk;
         $this->content = $content;
         $this->datePost = $datePost;
     }
 
     /**
+     * Get id of the comment
      * @return int|null
      */
     public function getId(): ?int {
@@ -34,6 +38,7 @@ class Comment {
     }
 
     /**
+     * Set id of the comment
      * @param int|null $id
      */
     public function setId(?int $id): void {
@@ -41,38 +46,61 @@ class Comment {
     }
 
     /**
+     * Get status of the comment
      * @return int|null
      */
-    public function getUserFk(): ?int {
-        return $this->userFk;
+    public function getStatus(): ?int {
+        return $this->status;
     }
 
     /**
-     * @param int|null $userFk
-     * @return Comment
+     * Set status of the comment
+     * @param int|null $status
+     * @return Commentary
      */
-    public function setUserFk(?int $userFk): Comment {
-        $this->userFk = $userFk;
+    public function setStatus(?int $status): Commentary {
+        $this->status = $status;
         return $this;
     }
 
     /**
-     * @return string|null
+     * Get author(user_fk) of the comment
+     * @return int|null
      */
-    public function getSubject(): ?string {
-        return $this->subject;
+    public function getAuthorFk(): ?int {
+        return $this->authorFk;
     }
 
     /**
-     * @param string|null $subject
-     * @return Comment
+     * Set author(user_fk) of the comment
+     * @param int|null $authorFk
+     * @return Commentary
      */
-    public function setSubject(?string $subject): Comment {
-        $this->subject = $subject;
+    public function setUserFk(?int $authorFk): Commentary {
+        $this->authorFk = $authorFk;
+        return $this;
+    }
+
+    /**
+     * Get subject (subject_fk) of the comment
+     * @return int|null
+     */
+    public function getSubjectFk(): ?int {
+        return $this->subjectFk;
+    }
+
+    /**
+     * Set subject of the comment
+     * @param $subjectFk
+     * @return Commentary
+     */
+    public function setSubject($subjectFk): Commentary {
+        $this->subjectFk = $subjectFk;
         return  $this;
     }
 
     /**
+     * Get content of the comment
      * @return string|null
      */
     public function getContent(): ?string {
@@ -80,10 +108,11 @@ class Comment {
     }
 
     /**
+     * Set content of the comment
      * @param string|null $content
-     * @return Comment
+     * @return Commentary
      */
-    public function setContent(?string $content): Comment {
+    public function setContent(?string $content): Commentary {
         $this->content = $content;
         return  $this;
     }

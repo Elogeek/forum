@@ -25,6 +25,7 @@ class Category {
     }
 
     /**
+     * Set id of the category
      * @param int|null $id
      */
     public function setId(?int $id): void {
@@ -40,7 +41,7 @@ class Category {
     }
 
     /**
-     * Set id of Category
+     * Set name of the Category
      * @param string|null $name
      */
     public function setName(?string $name): void {
